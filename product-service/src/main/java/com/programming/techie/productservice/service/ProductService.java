@@ -43,4 +43,8 @@ public class ProductService {
                 .price(product.getPrice())
                 .build();
     }
- }
+
+    public String getProductById(String id) {
+        return productRepository.getProductById((id)).toString();
+    }
+}

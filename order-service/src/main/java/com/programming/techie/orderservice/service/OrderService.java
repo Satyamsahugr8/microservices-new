@@ -23,7 +23,7 @@ import java.util.UUID;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final WebClient webClient;
+    private final WebClient.Builder webClient;
 //    private final ObservationRegistry observationRegistry;
 //    private final ApplicationEventPublisher applicationEventPublisher;
 
@@ -45,8 +45,10 @@ public class OrderService {
         // Call Inventory Service, and place order if product is in stock
         // Synchronous call - wait for response for come
         InventoryResponse[] inventoryResponseArray = webClient
+                .build()
                 .get()
-                .uri("http://localhost:8082/api/inventory",
+//                .uri("http://localhost:8082/api/inventory",
+                .uri("http://inventory-service/api/inventory",
                         uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
                 .retrieve().bodyToMono(InventoryResponse[].class)
                 .block();
@@ -68,5 +70,9 @@ public class OrderService {
         orderLineItems.setQuantity(orderLineItemsDto.getQuantity());
         orderLineItems.setSkuCode(orderLineItemsDto.getSkuCode());
         return orderLineItems;
+    }
+
+    public List<Order> getOrders() {
+        return orderRepository.findAll();
     }
 }

@@ -1,6 +1,5 @@
 package com.programming.techie.orderservice.config;
 
-import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 //import org.springframework.kafka.core.KafkaTemplate;

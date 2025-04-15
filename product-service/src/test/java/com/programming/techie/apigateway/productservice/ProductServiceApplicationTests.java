@@ -1,4 +1,4 @@
-package com.programming.techie.productservice;
+package com.programming.techie.apigateway.productservice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.programming.techie.productservice.dto.ProductRequest;
