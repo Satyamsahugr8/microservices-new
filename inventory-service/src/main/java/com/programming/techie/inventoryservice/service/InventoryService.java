@@ -3,6 +3,7 @@ package com.programming.techie.inventoryservice.service;
 import com.programming.techie.inventoryservice.dto.InventoryResponse;
 import com.programming.techie.inventoryservice.repository.InventoryRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,8 +31,12 @@ public class InventoryService {
 //    }
 
     @Transactional(readOnly = true)
+    @SneakyThrows
     public List<InventoryResponse> isInStock(List<String> skuCode) {
-        log.info("Checking Inventory");
+        log.info("inside isInStock Inventory");
+        log.info("Wait Started");
+//        Thread.sleep(5000);
+        log.info("Wait Ended");
         return inventoryRepository.findBySkuCodeIn(skuCode).stream()
                 .map(inventory ->
                         InventoryResponse.builder()
@@ -41,4 +46,5 @@ public class InventoryService {
                                 .build()
                 ).toList();
     }
+
 }
